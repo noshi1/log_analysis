@@ -22,6 +22,15 @@ popular_authors where authors.id = popular_authors.author\
 # 3. On which days did more than 1% of requests lead to errors?
 query3 = "select * from error_per where err_persent > 1.0;"
 
+def create_conn():
+    """Connect to PostgreSQL databse and returns a database connection."""
+    try:
+        conn = pycopg2.connect(database=DBNAME)
+        cursor = conn.cursor()
+        return conn, cursor
+    except:
+        print("Unable to connect to the database")
+
 def popular_articles(query):
     """ This method will return top three popular articles."""
     conn = psycopg2.connect(database=DBNAME)
