@@ -22,36 +22,27 @@ popular_authors where authors.id = popular_authors.author\
 # 3. On which days did more than 1% of requests lead to errors?
 query3 = "select * from error_per where err_persent > 1.0;"
 
-def create_conn():
+def create_conn(query):
     """Connect to PostgreSQL databse and returns a database connection."""
     try:
-        conn = pycopg2.connect(database=DBNAME)
+        conn = psycopg2.connect(database=DBNAME)
         cursor = conn.cursor()
-        return conn, cursor
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
     except:
         print("Unable to connect to the database")
 
-def popular_articles(query):
+def popular_articles(query1):
     """ This method will return top three popular articles."""
-    conn = psycopg2.connect(database=DBNAME)
-    cur = conn.cursor()
-    cur.execute(query)
-    result = cur.fetchall()
+    result = create_conn(query1)
     print("Popular articles:")
-    for row in range(len(result)):
-        article = result[row][0]
-        view = result[row][1]
-        article_view = "{}. {} -- {} views".format(row+1, article, view)
+    for i, (article, view) in enumerate(result, 1):
+        article_view = "{}. {} -- {} views".format(i, article, view)
         print(article_view)
-
-    conn.close()
     
 def popular_authors(query):
     """This method will print top most popular article authors."""
-    conn = psycopg2.connect(database=DBNAME)
-    cur = conn.cursor()
-    cur.execute(query)
-    result = cur.fetchall()
     print("Popular authors:")
     for row in range(len(result)):
         author = result[row][0]
@@ -63,10 +54,6 @@ def popular_authors(query):
 
 def log_error(query):
     """This method will print which days more requests goes to errors."""
-    conn = psycopg2.connect(database=DBNAME)
-    cur = conn.cursor()
-    cur.execute(query)
-    result = cur.fetchall()
     print("More then 1% error days: ")
     for row in range(len(result)):
         day = result[row][0]
