@@ -1,4 +1,4 @@
-# Database code to connect postgresql
+#!/usr/bin/env python3
 
 import psycopg2
 from psycopg2 import Error
