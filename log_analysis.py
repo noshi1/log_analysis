@@ -49,14 +49,13 @@ def popular_authors(query2):
         author_view = "{}. {} -- {} views".format(i, author, view)
         print(author_view)
 
-def log_error(query):
+def log_error(query3):
     """This method will print which days more requests goes to errors."""
+    result = create_conn(query3)
     print("More then 1% error days: ")
-    for row in range(len(result)):
-        day = result[row][0]
-        errors = result[row][1]
-        error_days = "{}. {} -- {} errors".format(row+1, day, errors)
-        print(error_days)
+    for i, (day, errors) in enumerate(result, 1):
+        err_day = "{}. {} -- {} views".format(i, day, errors)
+        print(err_day)
 
 
 if __name__ == '__main__':
