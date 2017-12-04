@@ -15,7 +15,8 @@ unzip this file and cd to this directory from your terminal then cd to vagrant f
 
 ## To Run
 * To startup run **vagrant up**
-* To log into Linux VM rum **vagrant ssh**
+* To log into Linux VM run **vagrant ssh**
+
 To load the data cd into the vagrant directory and use the command psql -d news -f newsdata.sql.
 The database contains these three tables:
 * articles
@@ -24,23 +25,23 @@ The database contains these three tables:
 
 ## PSQL commands to create the database views are:
 
-### popular_authors view
+### create view popular_authors
 create view popular_authors as
 select articles.author, articles.slug as article, count(*) as views
 from log, articles where log.path like(concat('/article/',articles.slug))
 group by article, author order by views desc;
 
-### total_req view
+### create view total_req
 create view total_req as
 select count(*) as count, date(time) as date from log
 group by date order by count desc;
 
-### err_req view
+### create view err_req
 create view err_req as select count(*)
 as count, date(time) as date from log where status != '200 OK'
 group by date order by count desc;
 
-### error_per view
+### create view error_per
 create view error_per as
 select total_req.date, round((100.0*err_req.count)/total_req.count,2)as err_persent
 from err_req, total_req where err_req.date = total_req.date;
