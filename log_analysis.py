@@ -22,6 +22,7 @@ popular_authors where authors.id = popular_authors.author\
 # 3. On which days did more than 1% of requests lead to errors?
 query3 = "select * from error_per where err_persent > 1.0;"
 
+
 def create_conn(query):
     """Connect to PostgreSQL databse and returns a database connection."""
     try:
@@ -33,6 +34,7 @@ def create_conn(query):
     except:
         print("Unable to connect to the database")
 
+
 def popular_articles(query1):
     """ This method will return top three popular articles."""
     result = create_conn(query1)
@@ -40,7 +42,8 @@ def popular_articles(query1):
     for i, (article, view) in enumerate(result, 1):
         article_view = "{}. {} -- {} views".format(i, article, view)
         print(article_view)
-    
+
+
 def popular_authors(query2):
     """This method will print top most popular article authors."""
     result = create_conn(query2)
@@ -48,6 +51,7 @@ def popular_authors(query2):
     for i, (author, view) in enumerate(result, 1):
         author_view = "{}. {} -- {} views".format(i, author, view)
         print(author_view)
+
 
 def log_error(query3):
     """This method will print which days more requests goes to errors."""
@@ -62,3 +66,4 @@ if __name__ == '__main__':
     popular_articles(query1)
     popular_authors(query2)
     log_error(query3)
+
