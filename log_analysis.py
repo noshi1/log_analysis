@@ -41,16 +41,13 @@ def popular_articles(query1):
         article_view = "{}. {} -- {} views".format(i, article, view)
         print(article_view)
     
-def popular_authors(query):
+def popular_authors(query2):
     """This method will print top most popular article authors."""
+    result = create_conn(query2)
     print("Popular authors:")
-    for row in range(len(result)):
-        author = result[row][0]
-        view = result[row][1]
-        author_view = "{}. {} -- {} views".format(row+1, author, view)
+    for i, (author, view) in enumerate(result, 1):
+        author_view = "{}. {} -- {} views".format(i, author, view)
         print(author_view)
-
-    conn.close()
 
 def log_error(query):
     """This method will print which days more requests goes to errors."""
