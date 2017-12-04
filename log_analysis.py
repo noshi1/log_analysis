@@ -22,10 +22,8 @@ popular_authors where authors.id = popular_authors.author\
 # 3. On which days did more than 1% of requests lead to errors?
 query3 = "select * from error_per where err_persent > 1.0;"
 
-# This method will get top three popular articles
-
-
 def popular_articles(query):
+    """ This method will return top three popular articles."""
     conn = psycopg2.connect(database=DBNAME)
     cur = conn.cursor()
     cur.execute(query)
@@ -38,11 +36,9 @@ def popular_articles(query):
         print(article_view)
 
     conn.close()
-
-# This method will print top most popular article authors
-
-
+    
 def popular_authors(query):
+    """This method will print top most popular article authors."""
     conn = psycopg2.connect(database=DBNAME)
     cur = conn.cursor()
     cur.execute(query)
@@ -56,10 +52,8 @@ def popular_authors(query):
 
     conn.close()
 
-# This method will print which days more requests goes to errors
-
-
 def log_error(query):
+    """This method will print which days more requests goes to errors."""
     conn = psycopg2.connect(database=DBNAME)
     cur = conn.cursor()
     cur.execute(query)
