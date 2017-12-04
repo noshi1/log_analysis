@@ -6,9 +6,13 @@ from psycopg2 import Error
 DBNAME = "news"
 
 # 1. What are the most popular three articles of all time?
-query1 = "select articles.slug as article, count(*) as views from log,\
-articles where log.path like(concat('/article/',articles.slug))\
-group by article order by views desc limit 3;"
+query1 = """Select articles.title AS article, count(*) AS views
+            FROM log, articles
+            WHERE log.path = (concat('/article/',articles.slug))
+            GROUP BY article
+            ORDER BY views DESC
+            LIMIT 3;
+            """
 
 # 2. Who are the most popular article authors of all time?
 query2 = "select name, sum(views) as views from authors,\
