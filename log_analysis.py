@@ -31,8 +31,9 @@ def create_conn(query):
         cursor.execute(query)
         result = cursor.fetchall()
         return result
-    except:
-        print("Unable to connect to the database")
+    except Exception as e:
+        print(e)
+        exit(1)
 
 
 def popular_articles(query1):
@@ -58,7 +59,7 @@ def log_error(query3):
     result = create_conn(query3)
     print("More then 1% error days: ")
     for i, (day, errors) in enumerate(result, 1):
-        err_day = "{}. {} -- {} views".format(i, day, errors)
+        err_day = "{}. {} -- {} %".format(i, day, errors)
         print(err_day)
 
 
@@ -66,4 +67,3 @@ if __name__ == '__main__':
     popular_articles(query1)
     popular_authors(query2)
     log_error(query3)
-
