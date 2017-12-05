@@ -1,4 +1,4 @@
-CRAETE VIEW total_req AS
+CREATE VIEW total_req AS
 SELECT COUNT(*) AS count,
 DATE(time) AS date
 FROM log
