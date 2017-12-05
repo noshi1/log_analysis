@@ -1,16 +1,13 @@
 Popular articles:
-
-1. candidate-is-jerk -- 338647 views
-2. bears-love-berries -- 253801 views
-3. bad-things-gone -- 170098 views
+1. Candidate is jerk, alleges rival -- 338647 views
+2. Bears love berries, alleges bear -- 253801 views
+3. Bad things gone, say good people -- 170098 views
 
 Popular authors:
-
 1. Ursula La Multa -- 507594 views
 2. Rudolf von Treppenwitz -- 423457 views
 3. Anonymous Contributor -- 170098 views
 4. Markoff Chaney -- 84557 views
 
 More then 1% error days:
-
-1. 2016-07-17 -- 2.26 errors
+1. 2016-07-17 -- 2.26 %
